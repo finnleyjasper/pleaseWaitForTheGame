@@ -8,7 +8,7 @@
 
 using System;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
+//using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 
