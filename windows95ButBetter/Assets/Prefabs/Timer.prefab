@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Time remaining: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddadbe0dbc3d9af4bbf17f732a33973e, type: 2}
+  m_sharedMaterial: {fileID: -729998147572902675, guid: ddadbe0dbc3d9af4bbf17f732a33973e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6d612b3c25149b397c69270e6f0703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 60
+  defaultTime: 60
   loadBar: {fileID: 3992565970466963273}
   numberTextToUpdate: {fileID: 7233035280672124466}
 --- !u!1 &5424548495709455015
