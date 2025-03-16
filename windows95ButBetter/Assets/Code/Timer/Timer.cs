@@ -16,7 +16,9 @@ public class Timer : MonoBehaviour
 {
     private bool loadComplete = false; // access through property
 
-    public float timeRemaining = 60; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
+    [SerializeField] private float defaultTime = 60; //
+
+    private float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
 
     private float lastSampledTime = 0;
 
@@ -28,14 +30,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        // reset bar tp 0%
-        loadBar.sizeDelta = new Vector2(0, loadBar.rect.height);
-
-        // finding the increment - this will change depending on the size of the bar
-        RectTransform background = GetComponent<RectTransform>();
-        float maxLoadBarSize = background.rect.width - 5;
-        loadBarIncrememnt = maxLoadBarSize / timeRemaining;
-
+        Reset();
     }
 
     void Update()
@@ -51,23 +46,60 @@ public class Timer : MonoBehaviour
             }
 
             // render the text
-            if (timeRemaining == 60)
+            double minutes = Math.Truncate(timeRemaining / 60);
+            double seconds = timeRemaining - (60 * minutes);
+
+            if (minutes >= 10)
             {
-                numberTextToUpdate.text = "Time remaining: 01:00";
+                numberTextToUpdate.text = "Time remaining: " + minutes + ":";
             }
             else
             {
-                numberTextToUpdate.text = "Time remaining: 00:" + timeRemaining.ToString();
+                numberTextToUpdate.text = "Time remaining: 0" + minutes + ":";
             }
 
+            if (seconds < 10)
+            {
+                numberTextToUpdate.text = numberTextToUpdate.text + "0" + seconds;
+            }
+            else
+            {
+                numberTextToUpdate.text = numberTextToUpdate.text + seconds;
+            }
         }
 
         // checks if done
         if (timeRemaining <= 0)
         {
             loadComplete = true;
+            Debug.LogWarning("Well done! You waited!");
             this.gameObject.SetActive(false);
         }
+    }
+
+    public void Reset()
+    {
+        timeRemaining = defaultTime;
+        loadComplete = false;
+
+        // reset bar to 0%
+        loadBar.sizeDelta = new Vector2(0, loadBar.rect.height);
+        CalculateLoadIncrement();
+    }
+
+    public void AddTime(float timeToAdd)
+    {
+        timeRemaining += timeToAdd;
+        CalculateLoadIncrement();
+    }
+
+    private void CalculateLoadIncrement()
+    {
+        // finding the increment - this will change depending on the size of the bar nad how much time is left
+        RectTransform background = GetComponent<RectTransform>();
+        float maxLoadBarSize = background.rect.width - 5;
+        float loadBarSizeRemaining = maxLoadBarSize - loadBar.rect.width;
+        loadBarIncrememnt = loadBarSizeRemaining / timeRemaining;
     }
 
     // property so other things in the scene can do stuff when the load is complete... like minecraft movie...
@@ -75,5 +107,4 @@ public class Timer : MonoBehaviour
     {
          get { return loadComplete; }
     }
-
 }
