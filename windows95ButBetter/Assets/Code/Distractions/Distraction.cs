@@ -10,9 +10,9 @@ public class Distraction : MonoBehaviour
 
     public void OpenPopup(LoadManager loadManager)
     {
-        // player can only open one window at a time
+        // player can only open one window from the same Distraction at a time
         // could make it more realistic and enable them opening many of the same windows but...
-        // problem for later maybe?
+        // ...problem for later maybe?
         if (!popupWindow.activeSelf)
         {
             popupWindow.SetActive(true);

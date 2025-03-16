@@ -6,10 +6,6 @@
 *       -> Load the video (player didn't touch anything)
 *       -> New dialogue to show on the load screen
 *
-*   For now crash is determined only by the *number* of things interacted with, but we could
-*   could change this to a "points" based system - ie. watching a video adds A time and contributes
-*   to a crash B amount, while reading a text file only adds X amount of time and contributes Y amount
-*
 */
 
 using UnityEngine;
@@ -19,19 +15,21 @@ public class LoadManager : MonoBehaviour
 {
     public const int CrashThreshold = 10;
 
-    private int interactions = 0;
+    // when the interactionScore reaches the CrashThreshold a crash will occur
+    // this is increased by interacting with Distractions, which can each different amounts (their interactionValue)
+    private int interactionScore = 0;
 
     [SerializeField] private Timer timer;
 
     // Update is called once per frame
     void Update()
     {
-        if (interactions >= CrashThreshold)
+        if (interactionScore >= CrashThreshold)
         {
             // window should crash
 
             timer.Reset();
-            interactions = 0;
+            interactionScore = 0;
 
             Debug.Log("The program crashed before it could load.");
         }
@@ -40,9 +38,9 @@ public class LoadManager : MonoBehaviour
 
     public void AddInteraction(int interactionValue, float timePenalty)
     {
-        interactions += interactionValue;
+        interactionScore += interactionValue;
         timer.AddTime(timePenalty);
 
-        Debug.Log("Current interactions: " + interactions);
+        Debug.Log("Current interaction score: " + interactionScore);
     }
 }
