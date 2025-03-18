@@ -38,6 +38,7 @@ public class DesktopIcon : MonoBehaviour
         {
             Instantiate(WindowPrefab, WindowSpawnLocation.position, Quaternion.identity);
             Debug.Log("Window opened for this icon");
+            WindowPrefab.GetComponent<DraggableWindow>().enabled = true;
         }
     }
 
