@@ -18,6 +18,7 @@ public class LoadManager : MonoBehaviour
     // when the interactionScore reaches the CrashThreshold a crash will occur
     // this is increased by interacting with Distractions, which can each different amounts (their interactionValue)
     private int interactionScore = 0;
+    [SerializeField] private DraggableWindow loadWindow;
 
     [SerializeField] private Timer timer;
 
@@ -28,7 +29,7 @@ public class LoadManager : MonoBehaviour
         {
             // window should crash
 
-            timer.Reset();
+            loadWindow.gameObject.SetActive(false);
             interactionScore = 0;
 
             Debug.Log("The program crashed before it could load.");
