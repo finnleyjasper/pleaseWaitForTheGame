@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectionOverlayPrefab: {fileID: 2934567387950392611, guid: 0c583238f20208948a94ff7fd5f23e0d, type: 3}
-  WindowPrefab: {fileID: 0}
+  WindowPrefab: {fileID: 3123940906332458240, guid: 339f84773bb40804481dd69992924f38, type: 3}
   WindowSpawnLocation: {fileID: 1824321316}
 --- !u!4 &962055271 stripped
 Transform:
@@ -1330,86 +1330,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1824321316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1628752999
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.3658452
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5038293
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044013787581969732, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3088189683269419793, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      propertyPath: m_Name
-      value: MSPaint
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3088189683269419793, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1628753001}
-  m_SourcePrefab: {fileID: 100100000, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
---- !u!1 &1628753000 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3088189683269419793, guid: 9dc206a333ac6ca41b5dc90e51a81f76, type: 3}
-  m_PrefabInstance: {fileID: 1628752999}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1628753001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628753000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e9b456589f76a4c9cdb95e3b0b02f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasCamera: {fileID: 0}
-  drawingCanvas: {fileID: 0}
-  lineWidth: 0.1
 --- !u!1 &1692417669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectionOverlayPrefab: {fileID: 2934567387950392611, guid: 0c583238f20208948a94ff7fd5f23e0d, type: 3}
-  WindowPrefab: {fileID: 0}
+  WindowPrefab: {fileID: 5178661000485769918, guid: e8cce9f3295b04f449bed9c0f4ce7df4, type: 3}
   WindowSpawnLocation: {fileID: 1824321316}
 --- !u!1 &1824321315
 GameObject:
@@ -2082,7 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectionOverlayPrefab: {fileID: 2934567387950392611, guid: 0c583238f20208948a94ff7fd5f23e0d, type: 3}
-  WindowPrefab: {fileID: 0}
+  WindowPrefab: {fileID: 7225376434860693059, guid: 24446f50aae74614ea9d88fee032619a, type: 3}
   WindowSpawnLocation: {fileID: 1824321316}
 --- !u!1001 &2114693505
 PrefabInstance:
@@ -2185,4 +2105,3 @@ SceneRoots:
   - {fileID: 401829889}
   - {fileID: 570454007}
   - {fileID: 1463972660}
-  - {fileID: 1628752999}
