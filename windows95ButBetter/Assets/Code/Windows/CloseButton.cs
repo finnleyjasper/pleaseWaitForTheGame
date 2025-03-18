@@ -4,6 +4,7 @@ public class CloseButton : MonoBehaviour
 {
     private void OnMouseDown()
     {
+        Debug.Log("Button Clicked");
         // Find the parent DraggableWindow and destroy it
         DraggableWindow draggableWindow = GetComponentInParent<DraggableWindow>();
 

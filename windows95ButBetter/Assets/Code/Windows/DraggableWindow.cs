@@ -74,7 +74,7 @@ public class DraggableWindow : MonoBehaviour
     }
 
     // Set the sorting layer of all children recursively, including Canvas components
-    void SetSortingLayerRecursively(GameObject obj, string sortingLayerName)
+    public void SetSortingLayerRecursively(GameObject obj, string sortingLayerName)
     {
         // Check and set the sorting layer for the parent object
         Renderer renderer = obj.GetComponent<Renderer>();
