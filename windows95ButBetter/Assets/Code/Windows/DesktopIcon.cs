@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class DesktopIcon : MonoBehaviour
@@ -38,7 +39,15 @@ public class DesktopIcon : MonoBehaviour
         {
             Instantiate(WindowPrefab, WindowSpawnLocation.position, Quaternion.identity);
             Debug.Log("Window opened for this icon");
-            WindowPrefab.GetComponent<DraggableWindow>().enabled = true;
+            DraggableWindow draggableWindow = WindowPrefab.GetComponent<DraggableWindow>();
+            if (draggableWindow != null)
+            {
+                draggableWindow.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("DraggableWindow script not found on the window prefab.");
+            }
         }
     }
 

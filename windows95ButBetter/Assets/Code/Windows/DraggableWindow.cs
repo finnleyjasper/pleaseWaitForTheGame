@@ -1,24 +1,22 @@
-// WHY ISNT THIS SCRIPT WORKING??
-// Check:
-//      --> Canvas object has override sorting on and later set to Window Content
-//      --> Sorting layer for Draggable Window under its sprite renderer == Window
-//      --> The script successfully finds the Main Camera in the scene to parse to the canvas
-
 using UnityEngine;
 
 public class DraggableWindow : MonoBehaviour
 {
     private Vector3 offset;
     private bool isDragging = false;
+    private bool isClicked = false; // Track whether the window is clicked
     [SerializeField] private Camera canvasWorldCamera;
-    private Canvas canvas;
+    public Canvas canvas;
+    private Collider2D windowCollider;
 
     void Awake()
     {
-        // Give the canvas the Main Camera
+        // Initialize canvas and camera
         canvas = GetComponentInChildren<Canvas>();
-        canvas.worldCamera =  GameObject.Find("Main Camera").GetComponent<Camera>();
+        canvas.worldCamera = Camera.main;
 
+        // Get the Collider component
+        windowCollider = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -28,13 +26,24 @@ public class DraggableWindow : MonoBehaviour
         {
             if (IsMouseOver())
             {
+                isClicked = true;
+
+                // Set the parent window and all its children, including child canvases, to the "Windows" sorting layer
+                SetSortingLayerRecursively(gameObject, "Windows");
+
+                // Start dragging
                 isDragging = true;
                 // Calculate the offset between the object position and mouse position when dragging starts
                 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
             else
             {
-                // If the mouse is not over the object, do not start dragging
+                if (isClicked)
+                {
+                    // If clicked outside the window, reset the sorting layer
+                    SetSortingLayerRecursively(gameObject, "Default"); // Or any other layer for unselected windows
+                    isClicked = false;
+                }
             }
         }
 
@@ -60,9 +69,31 @@ public class DraggableWindow : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f; // Set the z-value to 0 for 2D space
 
-        Collider2D collider = GetComponent<Collider2D>();
+        // Check if the mouse is over the window's collider
+        return windowCollider.bounds.Contains(mousePos);
+    }
 
-        // Check if the mouse is within the object's bounds
-        return collider.bounds.Contains(mousePos);
+    // Set the sorting layer of all children recursively, including Canvas components
+    void SetSortingLayerRecursively(GameObject obj, string sortingLayerName)
+    {
+        // Check and set the sorting layer for the parent object
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+        }
+
+        // If the object has a Canvas component, set its sorting layer as well
+        Canvas objCanvas = obj.GetComponentInChildren<Canvas>();
+        if (objCanvas != null)
+        {
+            objCanvas.sortingLayerName = sortingLayerName;
+        }
+
+        // Recursively set the sorting layer for all children
+        foreach (Transform child in obj.transform)
+        {
+            SetSortingLayerRecursively(child.gameObject, sortingLayerName);
+        }
     }
 }

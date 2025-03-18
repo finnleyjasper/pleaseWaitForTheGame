@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
 {
     private bool loadComplete = false; // access through property
 
-    [SerializeField] private float defaultTime = 60; //
+    [SerializeField] public float defaultTime = 60; //
 
     private float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
 
