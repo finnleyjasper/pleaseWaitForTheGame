@@ -1,9 +1,25 @@
+// WHY ISNT THIS SCRIPT WORKING??
+// Check:
+//      --> Canvas object has override sorting on and later set to Window Content
+//      --> Sorting layer for Draggable Window under its sprite renderer == Window
+//      --> The script successfully finds the Main Camera in the scene to parse to the canvas
+
 using UnityEngine;
 
 public class DraggableWindow : MonoBehaviour
 {
     private Vector3 offset;
     private bool isDragging = false;
+    [SerializeField] private Camera canvasWorldCamera;
+    private Canvas canvas;
+
+    void Awake()
+    {
+        // Give the canvas the Main Camera
+        canvas = GetComponentInChildren<Canvas>();
+        canvas.worldCamera =  GameObject.Find("Main Camera").GetComponent<Camera>();
+
+    }
 
     void Update()
     {

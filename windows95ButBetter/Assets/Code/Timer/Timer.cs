@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Timer : MonoBehaviour
 {
@@ -21,11 +22,14 @@ public class Timer : MonoBehaviour
 
     private float lastSampledTime = 0;
 
-   [SerializeField] private RectTransform loadBar; // the bar that will increase with time
+   [SerializeField] private Transform loadBar; // the bar that will increase with time
 
    [SerializeField] private TextMeshProUGUI numberTextToUpdate; // the actual text that gets rendered to the screen
 
     private float loadBarIncrememnt; // the amount the bar should tick up each second
+
+    // The maximum scale multiplier (final scale: 31.47341x the original width)
+    public float maxScaleMultiplier = 31.47341f;
 
     void Start()
     {
@@ -41,7 +45,7 @@ public class Timer : MonoBehaviour
             {
                 lastSampledTime = Time.time;
                 timeRemaining -= 1;
-                loadBar.sizeDelta = new Vector2((loadBar.rect.width + loadBarIncrememnt), loadBar.rect.height);
+                loadBar.localScale = new Vector2(loadBar.localScale.x + loadBarIncrememnt, loadBar.localScale.y);
             }
 
             // render the text
@@ -82,7 +86,7 @@ public class Timer : MonoBehaviour
         loadComplete = false;
 
         // reset bar to 0%
-        loadBar.sizeDelta = new Vector2(0, loadBar.rect.height);
+        loadBar.localScale = new Vector2(0, loadBar.localScale.y);
         CalculateLoadIncrement();
     }
 
@@ -94,10 +98,7 @@ public class Timer : MonoBehaviour
 
     private void CalculateLoadIncrement()
     {
-        // finding the increment - this will change depending on the size of the bar nad how much time is left
-        RectTransform background = GetComponent<RectTransform>();
-        float maxLoadBarSize = background.rect.width - 5;
-        float loadBarSizeRemaining = maxLoadBarSize - loadBar.rect.width;
+        float loadBarSizeRemaining = maxScaleMultiplier - loadBar.localScale.x;
         loadBarIncrememnt = loadBarSizeRemaining / timeRemaining;
     }
 
