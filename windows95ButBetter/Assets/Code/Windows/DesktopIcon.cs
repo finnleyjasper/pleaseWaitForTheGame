@@ -1,14 +1,15 @@
 //using UnityEditor.PackageManager.UI;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class DesktopIcon : MonoBehaviour
 {
-    public GameObject SelectionOverlayPrefab; 
-    public GameObject WindowPrefab; 
+    public GameObject SelectionOverlayPrefab;
+    public GameObject WindowPrefab;
     public Transform WindowSpawnLocation;
     private GameObject activeOverlay;
     private float lastClickTime = 0f;
-    private float doubleClickTime = 0.3f; // Max time between clicks 
+    private float doubleClickTime = 0.3f; // Max time between clicks
 
     void OnMouseDown()
     {
@@ -17,6 +18,7 @@ public class DesktopIcon : MonoBehaviour
         {
             // Double-click detected, open the window
             OpenWindow();
+
         }
         else
         {
@@ -40,6 +42,7 @@ public class DesktopIcon : MonoBehaviour
             Instantiate(WindowPrefab, WindowSpawnLocation.position, Quaternion.identity);
             Debug.Log("Window opened for this icon");
             DraggableWindow draggableWindow = WindowPrefab.GetComponent<DraggableWindow>();
+
             if (draggableWindow != null)
             {
                 draggableWindow.enabled = true;

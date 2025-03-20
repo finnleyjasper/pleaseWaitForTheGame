@@ -16,7 +16,7 @@ public class Distraction : MonoBehaviour
         if (!popupWindow.activeSelf)
         {
             popupWindow.SetActive(true);
-            loadManager.AddInteraction(interactionValue, timePenalty);
+            loadManager.AddInteraction(interactionValue);
         }
     }
 }

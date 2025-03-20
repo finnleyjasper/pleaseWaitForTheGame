@@ -9,6 +9,8 @@ public class DraggableWindow : MonoBehaviour
     public Canvas canvas;
     private Collider2D windowCollider;
 
+    ///public bool isActive = false;
+
     void Awake()
     {
         // Initialize canvas and camera
@@ -31,10 +33,16 @@ public class DraggableWindow : MonoBehaviour
                 // Set the parent window and all its children, including child canvases, to the "Windows" sorting layer
                 SetSortingLayerRecursively(gameObject, "Windows");
 
-                // Start dragging
-                isDragging = true;
-                // Calculate the offset between the object position and mouse position when dragging starts
-                offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                // IF STATEMENT NEEDED TO FIC MOVING WINDOW BUG
+                //if (isActive)
+                //{
+                    // Start dragging
+                    isDragging = true;
+                    // Calculate the offset between the object position and mouse position when dragging starts
+                    offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                //}
+
             }
             else
             {
@@ -43,6 +51,9 @@ public class DraggableWindow : MonoBehaviour
                     // If clicked outside the window, reset the sorting layer
                     SetSortingLayerRecursively(gameObject, "Default"); // Or any other layer for unselected windows
                     isClicked = false;
+                    gameObject.layer = LayerMask.NameToLayer("Default");
+                    Debug.Log(gameObject + " is now on the " + gameObject.layer + " layer");
+
                 }
             }
         }

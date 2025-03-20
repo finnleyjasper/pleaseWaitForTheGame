@@ -8,12 +8,16 @@
 *
 */
 
+using System.Data.Common;
+using System.Linq;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class LoadManager : MonoBehaviour
 {
-    public const int CrashThreshold = 10;
+    [SerializeField] public const int CrashThreshold = 10;
 
     // when the interactionScore reaches the CrashThreshold a crash will occur
     // this is increased by interacting with Distractions, which can each different amounts (their interactionValue)
@@ -22,12 +26,22 @@ public class LoadManager : MonoBehaviour
 
     [SerializeField] private Timer timer;
 
+    private int textIndex = 0;
+
+    [SerializeField] public TextMeshProUGUI textAsset;
+
+    private string[] dialogueOptions = {
+        "aa",
+        "stop",
+        "pls",
+        "omg"
+        };
+
     // Update is called once per frame
     void Update()
     {
         if (interactionScore >= CrashThreshold)
         {
-            // window should crash
 
             loadWindow.gameObject.SetActive(false);
             interactionScore = 0;
@@ -35,13 +49,22 @@ public class LoadManager : MonoBehaviour
             Debug.Log("The program crashed before it could load.");
         }
 
+
     }
 
-    public void AddInteraction(int interactionValue, float timePenalty)
+    public void AddInteraction(int interactionValue)
     {
         interactionScore += interactionValue;
-        timer.AddTime(timePenalty);
+        textAsset.text = dialogueOptions[textIndex];
+        textIndex += 1;
 
         Debug.Log("Current interaction score: " + interactionScore);
     }
+
+    public void LoadComplete()
+    {
+        //DO STUFF
+        textAsset.text = "Game loaded! Please wait a moment while we load your content...";
+    }
+
 }

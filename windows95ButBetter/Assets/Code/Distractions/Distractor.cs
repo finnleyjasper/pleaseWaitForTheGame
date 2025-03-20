@@ -35,6 +35,10 @@ public class Distractor : MonoBehaviour
             // Start adding time every second
             InvokeRepeating("AddTime", 0f, 1f);
         }
+
+        // add an interaction to the manager's counter
+        LoadManager manager = GameObject.Find("Manager").GetComponent<LoadManager>();
+        manager.AddInteraction(1);
     }
 
     void AddTime()

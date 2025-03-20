@@ -76,6 +76,10 @@ public class Timer : MonoBehaviour
         {
             loadComplete = true;
             Debug.LogWarning("Well done! You waited!");
+
+            LoadManager manager = GameObject.Find("Manager").GetComponent<LoadManager>();
+            manager.LoadComplete();
+
             this.gameObject.SetActive(false);
         }
     }
