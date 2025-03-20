@@ -2092,6 +2092,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 401829889}
     m_Modifications:
+    - target: {fileID: 672315473675100847, guid: 8a2afb5cdb28649e2ba1fac6999647ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 954245417440248924, guid: 8a2afb5cdb28649e2ba1fac6999647ba, type: 3}
       propertyPath: m_Name
       value: DownloadWindow
