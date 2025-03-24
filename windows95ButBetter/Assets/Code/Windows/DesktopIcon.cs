@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DesktopIcon : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DesktopIcon : MonoBehaviour
     private float lastClickTime = 0f;
     private float doubleClickTime = 0.3f; // Max time between clicks
 
+
     void OnMouseDown()
     {
         // Handle double-click detection
@@ -16,6 +18,7 @@ public class DesktopIcon : MonoBehaviour
         {
             // Double-click detected, open the window
             OpenWindow();
+            GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("click");
 
         }
         else
@@ -61,5 +64,15 @@ public class DesktopIcon : MonoBehaviour
             Destroy(activeOverlay);  // Properly destroy the overlay
             activeOverlay = null;  // Reset the reference
         }
+    }
+
+    void OnMouseEnter()
+    {
+        GameObject.Find("Manager").GetComponent<LoadManager>().CursorClick();
+    }
+
+    void OnMouseExit()
+    {
+        GameObject.Find("Manager").GetComponent<LoadManager>().CursorReset();
     }
 }

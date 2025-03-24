@@ -26,9 +26,18 @@ public class DraggableWindow : MonoBehaviour
         // If the mouse is clicked, check if it's over the object
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsMouseOver())
+            WindowManager windowmngr = GameObject.Find("Manager").GetComponent<WindowManager>();
+
+            // if the mouse is over this window, mouse is not over the active window (ie. clipping through to this window under)
+            if ( (IsMouseOver() && !windowmngr.IsActiveWindowHit()) || (IsMouseOver() && windowmngr.activeWindow == this))
             {
                 isClicked = true;
+                windowmngr.activeWindow = this;
+
+                if (IsMouseOver() && !windowmngr.IsActiveWindowHit()) // play sfx if moving this to active window
+                {
+                    GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("click");
+                }
 
                 // Set the parent window and all its children, including child canvases, to the "Windows" sorting layer
                 SetSortingLayerRecursively(gameObject, "Windows");
@@ -51,8 +60,7 @@ public class DraggableWindow : MonoBehaviour
                     // If clicked outside the window, reset the sorting layer
                     SetSortingLayerRecursively(gameObject, "Default"); // Or any other layer for unselected windows
                     isClicked = false;
-                    gameObject.layer = LayerMask.NameToLayer("Default");
-                    Debug.Log(gameObject + " is now on the " + gameObject.layer + " layer");
+
 
                 }
             }

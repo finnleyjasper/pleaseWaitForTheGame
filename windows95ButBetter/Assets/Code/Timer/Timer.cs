@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
 
     [SerializeField] public float defaultTime = 60; //
 
-    private float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
+    public float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
 
     private float lastSampledTime = 0;
 
@@ -30,6 +30,8 @@ public class Timer : MonoBehaviour
 
     // The maximum scale multiplier (final scale: 31.47341x the original width)
     public float maxScaleMultiplier = 31.47341f;
+
+    public bool crashed = false;
 
     void Start()
     {
@@ -82,6 +84,13 @@ public class Timer : MonoBehaviour
 
             this.gameObject.SetActive(false);
         }
+
+        if (crashed)
+        {
+            // do nothing
+            // yes this is how i implemented it i dont care anymore
+            // here we go babey
+        }
     }
 
     public void Reset()
@@ -111,4 +120,5 @@ public class Timer : MonoBehaviour
     {
          get { return loadComplete; }
     }
+
 }
