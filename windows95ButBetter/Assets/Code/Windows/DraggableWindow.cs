@@ -19,6 +19,9 @@ public class DraggableWindow : MonoBehaviour
 
         // Get the Collider component
         windowCollider = GetComponent<Collider2D>();
+
+        GameObject.Find("Manager").GetComponent<WindowManager>().SetActiveWindow(this);
+        SetSortingLayerRecursively(gameObject, "Windows");
     }
 
     void Update()

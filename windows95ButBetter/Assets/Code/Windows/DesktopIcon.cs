@@ -11,7 +11,7 @@ public class DesktopIcon : MonoBehaviour
     private float doubleClickTime = 0.3f; // Max time between clicks
 
 
-    void OnMouseDown()
+    virtual public void OnMouseDown()
     {
         // Handle double-click detection
         if (Time.time - lastClickTime < doubleClickTime)

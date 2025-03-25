@@ -34,19 +34,21 @@ public class LoadManager : MonoBehaviour
     private string[] dialogueOptions = {
         "hey hold up what are you doing",
         "bro it's only like a minute???",
+        "WAIT WAIT WAIT JU-",
         "you have the attention span of a toddler!!!",
         "LOOK AT ME!!!!!",
         "hey wait a second okay just hold on-",
         "seriously don't press anything else i'm trying my best",
-        "WAIT WAIT WAIT JU-"
         };
 
     public Texture2D cursorClick;
     public Texture2D cursorPoint;
 
-    public bool isCrashed; // this is only used in windowmanager just accept that i needed it
+    public bool isCrashed;
 
-    [SerializeField] private GameObject errorWindow;
+    public GameObject secret;
+
+    [SerializeField] private GameObject errorPrefab;
 
     void Start()
     {
@@ -56,28 +58,39 @@ public class LoadManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (interactionScore >= CrashThreshold || timer.timeRemaining > 300) // load time greater than 5 mins
+        if (!isCrashed)
         {
-            //textAsset.text = "FATAL ERROR: The program crashed before it could load.";
-            GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("error");
-            gameObject.GetComponent<WindowManager>().activeWindow = GameObject.Find("Manager").GetComponent<DraggableWindow>();
-            timer.crashed = true;
+            if (interactionScore >= CrashThreshold || timer.timeRemaining > 300) // load time greater than 5 mins
+            {
+                isCrashed = true;
+                //textAsset.text = "FATAL ERROR: The program crashed before it could load.";
+                GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("error");
+                gameObject.GetComponent<WindowManager>().activeWindow = GameObject.Find("Manager").GetComponent<DraggableWindow>();
+                timer.crashed = true;
 
-            errorWindow.SetActive(true);
+                Instantiate(errorPrefab, loadWindow.gameObject.transform.position, Quaternion.identity);
 
-            isCrashed = true;
-            //loadWindow.gameObject.SetActive(false);
-            interactionScore = 0;
 
+                //loadWindow.gameObject.SetActive(false);
+                interactionScore = 0;
+
+                Debug.Log("The wizard crashed :(");
+
+            }
         }
+
 
     }
 
     public void AddInteraction(int interactionValue)
     {
-        interactionScore += interactionValue;
-        textAsset.text = dialogueOptions[textIndex];
-        textIndex += 1;
+        if (!timer.loadComplete)
+        {
+            interactionScore += interactionValue;
+            textAsset.text = dialogueOptions[textIndex];
+            textIndex += 1;
+        }
+
 
         Debug.Log("Current interaction score: " + interactionScore);
     }
@@ -86,7 +99,9 @@ public class LoadManager : MonoBehaviour
     {
         //DO STUFF
         gameObject.GetComponent<AudioManager>().PlayClip("completed");
-        textAsset.text = "Game loaded! Please wait a moment while we load your content...";
+        textAsset.text = "Game loaded! Thanks for playing :)";
+
+        Instantiate(secret, loadWindow.gameObject.transform.position, Quaternion.identity);
 
         // bring the load window to the front
         WindowManager windowmngr = GameObject.Find("Manager").GetComponent<WindowManager>();

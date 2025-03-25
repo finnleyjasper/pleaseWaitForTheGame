@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c5ad79658f4634dd891e3053d78a327b
+guid: 5306f5988c154480fbf50e2edb5b6ea4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8298711475232564713
-    second: errorimg_0
+      213: 1243834782759389292
+    second: BSOD_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: errorimg_0
+      name: BSOD_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 393
-        height: 147
+        width: 640
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 71a1e49b1ed05dc80800000000000000
-      internalID: -8298711475232564713
+      spriteID: c6806a1152df24110800000000000000
+      internalID: 1243834782759389292
       vertices: []
       indices: 
       edges: []
