@@ -6,9 +6,9 @@ public class DesktopIcon : MonoBehaviour
     public GameObject SelectionOverlayPrefab;
     public GameObject WindowPrefab;
     public Transform WindowSpawnLocation;
-    private GameObject activeOverlay;
-    private float lastClickTime = 0f;
-    private float doubleClickTime = 0.3f; // Max time between clicks
+    public GameObject activeOverlay;
+    public float lastClickTime = 0f;
+    public float doubleClickTime = 0.3f; // Max time between clicks
 
 
     virtual public void OnMouseDown()

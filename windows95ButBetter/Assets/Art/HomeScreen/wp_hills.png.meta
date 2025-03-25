@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8c710e35e1d6d42afa391e28051dc39f
+guid: e57fff7d80ff2234789f70a1aa88b1e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6350793106585778064
-    second: smallwallpaper_engine_0
+      213: 7538830052126899311
+    second: wp_hills_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: smallwallpaper_engine_0
+      name: wp_hills_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 32
-        height: 32
+        y: 27
+        width: 640
+        height: 453
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0977b08beac822850800000000000000
-      internalID: 6350793106585778064
+      spriteID: f6c301f6dfd4f9860800000000000000
+      internalID: 7538830052126899311
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      smallwallpaper_engine_0: 6350793106585778064
+      wp_hills_0: 7538830052126899311
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

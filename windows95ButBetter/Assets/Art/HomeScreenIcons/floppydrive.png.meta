@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bbd53df3ef4cd384bb1dc9551a75f59f
+guid: cda00d44122e6734cae85428a7ff99c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5997017439545425423
-    second: HomeScreenHills_0
+      213: -1010030676937635290
+    second: floppydrive_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HomeScreenHills_0
+      name: floppydrive_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 797
-        height: 600
+        y: 6
+        width: 32
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0e7de3769fa93350800000000000000
-      internalID: 5997017439545425423
+      spriteID: 62a82e06376abf1f0800000000000000
+      internalID: -1010030676937635290
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HomeScreenHills_0: 5997017439545425423
+      floppydrive_0: -1010030676937635290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
