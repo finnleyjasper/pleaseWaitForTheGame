@@ -14,11 +14,11 @@ using UnityEngine.SocialPlatforms;
 
 public class Timer : MonoBehaviour
 {
-    private bool loadComplete = false; // access through property
+    public bool loadComplete = false; // access through property
 
     [SerializeField] public float defaultTime = 60; //
 
-    private float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
+    public float timeRemaining; // 60 seconds is the default - the player can cause this to increase by interacting w/ stuff
 
     private float lastSampledTime = 0;
 
@@ -30,6 +30,8 @@ public class Timer : MonoBehaviour
 
     // The maximum scale multiplier (final scale: 31.47341x the original width)
     public float maxScaleMultiplier = 31.47341f;
+
+    public bool crashed = false;
 
     void Start()
     {
@@ -70,6 +72,10 @@ public class Timer : MonoBehaviour
                 numberTextToUpdate.text = numberTextToUpdate.text + seconds;
             }
         }
+        else if (crashed)
+        {
+           this.gameObject.SetActive(false);
+        }
 
         // checks if done
         if (timeRemaining <= 0)
@@ -82,6 +88,7 @@ public class Timer : MonoBehaviour
 
             this.gameObject.SetActive(false);
         }
+
     }
 
     public void Reset()
@@ -111,4 +118,5 @@ public class Timer : MonoBehaviour
     {
          get { return loadComplete; }
     }
+
 }

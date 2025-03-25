@@ -11,6 +11,7 @@ public class CloseButton : MonoBehaviour
         if (draggableWindow != null)
         {
             // Destroy the parent window (the DraggableWindow)
+            GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("click");
             Destroy(draggableWindow.gameObject);
 
             Debug.Log("Window closed");
