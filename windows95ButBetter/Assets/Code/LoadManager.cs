@@ -1,35 +1,15 @@
-/*
-*   Manages communication between "distractions" and the timer/loading screen itself
-*
-*   Will check how many things the player has interacted with and control:
-*       -> Load screen crash (too many things interacted with)
-*       -> Load the video (player didn't touch anything)
-*       -> New dialogue to show on the load screen
-*
-*/
-
-using System.Collections;
-using System.Data.Common;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-
+using TMPro;
 
 public class LoadManager : MonoBehaviour
 {
-    [SerializeField] public int CrashThreshold = 8;
-
-    // when the interactionScore reaches the CrashThreshold a crash will occur
-    // this is increased by interacting with Distractions, which can each different amounts (their interactionValue)
+    [SerializeField] private int CrashThreshold;
     private int interactionScore = 0;
     [SerializeField] private DraggableWindow loadWindow;
-
     [SerializeField] private Timer timer;
-
     private int textIndex = 0;
-
-    [SerializeField] public TextMeshProUGUI textAsset;
+    [SerializeField] private TextMeshProUGUI textAsset;
 
     private string[] dialogueOptions = {
         "hey hold up what are you doing",
@@ -39,71 +19,89 @@ public class LoadManager : MonoBehaviour
         "LOOK AT ME!!!!!",
         "hey wait a second okay just hold on-",
         "seriously don't press anything else i'm trying my best",
-        };
+    };
 
     public Texture2D cursorClick;
     public Texture2D cursorPoint;
-
-    public bool isCrashed;
-
     public GameObject secret;
-
     [SerializeField] private GameObject errorPrefab;
+
+    public bool isCrashed = false;
 
     void Start()
     {
-        // for some fucking reason the cursor is huge if this isnt manullalatllty done
+        ResetCrashThreshold();
         CursorReset();
     }
-    // Update is called once per frame
+
     void Update()
     {
-        if (!isCrashed)
+        // If DownloadWindow is disabled, force isCrashed to false
+        GameObject downloadWindow = GameObject.Find("DownloadWindow");
+        if (downloadWindow != null && !downloadWindow.activeSelf)
         {
-            if (interactionScore >= CrashThreshold || timer.timeRemaining > 300) // load time greater than 5 mins
-            {
-                isCrashed = true;
-                //textAsset.text = "FATAL ERROR: The program crashed before it could load.";
-                GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("error");
-                gameObject.GetComponent<WindowManager>().activeWindow = GameObject.Find("Manager").GetComponent<DraggableWindow>();
-                timer.crashed = true;
-
-                Instantiate(errorPrefab, loadWindow.gameObject.transform.position, Quaternion.identity);
-
-
-                //loadWindow.gameObject.SetActive(false);
-                interactionScore = 0;
-
-                Debug.Log("The wizard crashed :(");
-
-            }
+            isCrashed = false;
+            Debug.Log("DownloadWindow is disabled, resetting crash state.");
         }
 
+        // If crashed but interaction score has increased past the new threshold, reset crash state
+        if (isCrashed && interactionScore < CrashThreshold)
+        {
+            isCrashed = false;
+            Debug.Log("Interaction score has increased past the new threshold, resetting crash state.");
+        }
 
+        // Check for a crash condition
+        if (!isCrashed && (interactionScore >= CrashThreshold || timer.timeRemaining > 300))
+        {
+            HandleCrash();
+        }
+    }
+
+    void HandleCrash()
+    {
+        isCrashed = true;
+        interactionScore = 0; // Reset score after crash
+        CrashThreshold = UnityEngine.Random.Range(6, 12);
+        Debug.Log("The wizard crashed. New threshold set to: " + CrashThreshold);
+
+        // Play error sound and instantiate error
+        GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("error");
+        Instantiate(errorPrefab, loadWindow.gameObject.transform.position, Quaternion.identity);
+    }
+
+    void ResetAfterCrash()
+    {
+        isCrashed = false; // Allow future crashes
+        ResetCrashThreshold(); // Set a new random threshold
+        interactionScore = 0; // Fully reset interaction score again
+        Debug.Log("Crash Reset! New Threshold: " + CrashThreshold);
+    }
+
+    void ResetCrashThreshold()
+    {
+        CrashThreshold = UnityEngine.Random.Range(6, 12);
+        Debug.Log("New Crash Threshold set: " + CrashThreshold);
     }
 
     public void AddInteraction(int interactionValue)
     {
-        if (!timer.loadComplete)
-        {
-            interactionScore += interactionValue;
-            textAsset.text = dialogueOptions[textIndex];
-            textIndex += 1;
-        }
+        if (isCrashed || timer.loadComplete) return; // Ignore interactions during crash
 
+        interactionScore += interactionValue;
+        textAsset.text = dialogueOptions[Mathf.Min(textIndex, dialogueOptions.Length - 1)];
+        textIndex++;
 
         Debug.Log("Current interaction score: " + interactionScore);
     }
 
     public void LoadComplete()
     {
-        //DO STUFF
         gameObject.GetComponent<AudioManager>().PlayClip("completed");
         textAsset.text = "Game loaded! Thanks for playing :)";
 
         Instantiate(secret, loadWindow.gameObject.transform.position, Quaternion.identity);
 
-        // bring the load window to the front
         WindowManager windowmngr = GameObject.Find("Manager").GetComponent<WindowManager>();
         windowmngr.SetActiveWindow(loadWindow);
     }
@@ -117,6 +115,4 @@ public class LoadManager : MonoBehaviour
     {
         UnityEngine.Cursor.SetCursor(cursorPoint, Vector2.zero, CursorMode.ForceSoftware);
     }
-
-
 }
