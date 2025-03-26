@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LoadManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class LoadManager : MonoBehaviour
     public Texture2D cursorPoint;
     public GameObject secret;
     [SerializeField] private GameObject errorPrefab;
+    [SerializeField] private GameObject gameMovieWindowPrefab; // New field for GameMovieWindow prefab
 
     public bool isCrashed = false;
 
@@ -100,7 +102,8 @@ public class LoadManager : MonoBehaviour
         gameObject.GetComponent<AudioManager>().PlayClip("completed");
         textAsset.text = "Game loaded! Thanks for playing :)";
 
-        Instantiate(secret, loadWindow.gameObject.transform.position, Quaternion.identity);
+        // Load the "GameMovie" scene instead of instantiating objects
+        SceneManager.LoadScene("GameMovie");
 
         WindowManager windowmngr = GameObject.Find("Manager").GetComponent<WindowManager>();
         windowmngr.SetActiveWindow(loadWindow);

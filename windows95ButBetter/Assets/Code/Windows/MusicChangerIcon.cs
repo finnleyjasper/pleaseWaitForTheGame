@@ -11,6 +11,8 @@ public class MusicChangerIcon : DesktopIcon
         // Handle double-click detection
         if (Time.time - lastClickTime < doubleClickTime)
         {
+            LoadManager manager = GameObject.Find("Manager").GetComponent<LoadManager>();
+            manager.AddInteraction(1);
             // Double-click detected, change the music
             ChangeMusic();
             GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("click");

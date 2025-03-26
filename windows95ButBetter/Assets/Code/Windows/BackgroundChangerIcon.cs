@@ -13,6 +13,8 @@ public class BackgroundChangerIcon : DesktopIcon
         {
             // Double-click detected, change the background
             ChangeBackground();
+            LoadManager manager = GameObject.Find("Manager").GetComponent<LoadManager>();
+            manager.AddInteraction(1);
             GameObject.Find("Manager").GetComponent<AudioManager>().PlayClip("click");
         }
         else
